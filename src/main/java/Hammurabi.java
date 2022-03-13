@@ -1,14 +1,10 @@
-package hammurabi.src.main.java;
-
 import java.util.Random;
 import java.util.Scanner;
 
 public class Hammurabi {
     Random rand = new Random();
     static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-
         new Hammurabi().playGame();
     }
 
@@ -17,10 +13,27 @@ public class Hammurabi {
         int bushelsOfGrain = 2800; //bushels of grain in storage
         int land = 1000;
         int valueBushelsPerAcre = 19; // land value is 19 bushels/acre
-        int year = 0;
-        int numberOfAcresToBuy = 0;
-        int numberOfAcresToSell = 0;
-    }
+        int years = 1;
+        int bought, acresPlanted,feed,plague,starved,immig,harvest,rats;
+        while (years<=10) {
+            printSummary();
+            bought=askHowManyAcresToBuy(valueBushelsPerAcre, grain);
+            if (bought>0)
+                land+=bought;
+            else
+                land-=askHowManyAcresToSell(valueBushelsPerAcre,grain);
+            feed=askHowMuchGrainToFeedPeople(grain);
+            acresPlanted=askHowManyAcresToPlant(land, population, grain);
+            plague=plagueDeaths(population);
+            starved=starvationDeaths(population,feed);
+            immig=immigrants(population,land,grain);
+            harvest=harvest(acresPlanted);
+            rats=grainEatenByRats(grain);
+            valueBushelsPerAcre=newCostOfLand();
+            population=population-plague-starved+immig;
+            grain=grain-rats-feed+harvest;
+            years++;
+        }
 
         public static int askHowManyAcresToBuy (int price, int bushels) {
             //Scanner scan1 = new Scanner(System.in);
@@ -71,33 +84,34 @@ public class Hammurabi {
             //You can't sell more than you have.
         }
 
-        }
+    public static int askHowManyAcresToPlant(int acresOwned, int population, int bushels) {
+       int acresToPlant = 0;
+        if(acresToPlant > acresOwned) {
+        System.out.println(" O Hammurabi, but you only have" + acresOwned + " acres for which to plant!");
+        } else if ((acresToPlant > 10*  population)) {
+            System.out.println(" O Hammurabi, but you only have" + acresOwned + " acres for which to increase your grain!");
+        } else if (acresToPlant < 2 * bushels)
+    }
 
+    public int plagueDeaths (int population) {
+        return randomChance(15) ? population/2 : 0;
+    }
 
-        //for (int i = 0; i < years ; i ++) {
+    public int newCostOfLand(){
+        return rand.nextInt(7)+17; //bound is exclusive
+    }
 
+    public int harvest(int acresPlantedWithSeeds){
+        return (rand.nextInt(6)+1)*acresPlantedWithSeeds;
+    }
 
-//            System.out.println("O great Hammurabi!\n" +
-//                    "You are in year 1 of your ten year rule.\n" +
-//                    "In the previous year 0 people starved to death.\n" +
-//                    "In the previous year 5 people entered the kingdom.\n" +
-//                    "The population is now 100.\n" +
-//                    "We harvested 3000 bushels at 3 bushels per acre.\n" +
-//                    "Rats destroyed 200 bushels, leaving 2800 bushels in storage.\n" +
-//                    "The city owns 1000 acres of land.\n" +
-//                    "Land is currently worth 19 bushels per acre.");
+    public int grainEatenByRats(int bushels){
+        return randomChance(40)
+                ? (rand.nextInt(21)+10)*bushels / 100 //bound is exclusive
+                :0;
+    }
 
-
-
-//        //Ask the questions in this order. No backing up. No changing answers.
-//        int askHowManyAcresToBuy(int price, int bushels)
-//        int askHowManyAcresToSell(int acresOwned)
-//        int askHowMuchGrainToFeedPeople(int bushels)
-//        int askHowManyAcresToPlant(int acresOwned, int population, int bushels)
-//
-//
-//
-//
-//
-//    }
-//}
+    public boolean randomChance(double chanceOfOccurrence){
+        return rand.nextDouble()<(chanceOfOccurrence/100);
+    }
+}
