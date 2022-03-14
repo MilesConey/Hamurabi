@@ -37,7 +37,7 @@ public class Hammurabi {
             feed = askHowMuchGrainToFeedPeople(grain);
             grain -= feed;
             acresPlanted = askHowManyAcresToPlant(land, population, grain);
-            grain -=acresPlanted/2;
+            grain = grain - (acresPlanted * 2);
             plagueDeaths = plagueDeaths(population);
             population -= plagueDeaths;
             starved = starvationDeaths(population, feed);
@@ -167,7 +167,7 @@ public class Hammurabi {
                 System.out.println("\nO Hammurabi, but you only have " + acresOwned + " acres for which to plant!\n");
             } else if (acresToPlant > 10 * population) {
                 System.out.println("\nO Hammurabi, but you only have " + population + " people to work your fields!\n");
-            } else if (acresToPlant > 2 * bushels) {
+            } else if (acresToPlant > bushels / 2) {
                 System.out.println("\n O  Hammurabi, but you only have " + bushels + " bushels for which to plant!\n");
                 System.out.println("We don't have the resources to plant " + acresToPlant + " acres.");
             } else validAcreage = true;
