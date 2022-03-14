@@ -144,7 +144,9 @@ public class Hammurabi {
             System.out.println("A horrible plague has taken " + plagueDeaths + " lives.");
         }
         System.out.println("In the previous year " + starved + " people starved to death.");
-        System.out.println("In the previous year " + immigrants + " people have entered our kingdom.");
+        if (starved < 1) {
+            System.out.println("In the previous year " + immigrants + " people have entered our kingdom.");
+        }
         System.out.println("The total population is now " + population + ".");
         System.out.println("We have harvested " + harvest + " bushels of grain.");
         System.out.println("The kingdom owns " + land + " acres of land.");
