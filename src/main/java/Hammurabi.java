@@ -48,7 +48,7 @@ public class Hammurabi {
                 } else if (numberOfAcresToBuy >= 0 && bushels > price * numberOfAcresToBuy) {
                     return numberOfAcresToBuy;
 
-                    //bushels = bushels - (valueBushelsPerAcre * numberOfAcresToBuy);
+                    //for bushels = bushels - (valueBushelsPerAcre * numberOfAcresToBuy);
 
                 }
             } while (true);
