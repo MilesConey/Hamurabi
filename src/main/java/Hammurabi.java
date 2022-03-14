@@ -145,9 +145,9 @@ public class Hammurabi {
         }
         System.out.println("In the previous year " + starved + " people starved to death.");
         System.out.println("In the previous year " + immigrants + " people have entered our kingdom.");
-        System.out.println("The total population is now " + population);
-        System.out.println("We have harvested " + harvest + " bushels of grain");
-        System.out.println("The kingdom owns " + land + " acres of land");
+        System.out.println("The total population is now " + population + ".");
+        System.out.println("We have harvested " + harvest + " bushels of grain.");
+        System.out.println("The kingdom owns " + land + " acres of land.");
         System.out.println("Land is now priced at " + valueBushelsPerAcre + " bushels per acre.");
         if (grainEatenByRats > 0) {
             System.out.println("O  Hammurabi, rats have destroyed " + grainEatenByRats + " bushels! We only have " + grain + " remaining in storage.\n");
@@ -167,7 +167,7 @@ public class Hammurabi {
                 System.out.println("\nO Hammurabi, but you only have " + population + " people to work your fields!\n");
             } else if (acresToPlant > 2 * bushels) {
                 System.out.println("\n O  Hammurabi, but you only have " + bushels + " bushels for which to plant!\n");
-                System.out.println("We don't have the resources to plant " + acresToPlant + "acres");
+                System.out.println("We don't have the resources to plant " + acresToPlant + " acres.");
             } else validAcreage = true;
         }
         return acresToPlant;
